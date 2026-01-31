@@ -11,9 +11,11 @@ services:
       - key: PORT
         value: 10000
       - key: NETWORK
-        value: mumbai
-      # Add these after deploying contract to testnet:
-      # - key: CONTRACT_ADDRESS
-      #   value: YOUR_CONTRACT_ADDRESS
-      # - key: MUMBAI_RPC_URL
-      #   value: https://rpc-mumbai.maticvigil.com
+        value: sepolia
+      - key: SEPOLIA_RPC_URL
+        value: https://ethereum-sepolia.publicnode.com
+      - key: CONTRACT_ADDRESS
+        value: 0x93Eb2f88940778ae9B211065a03C488cB01BC761
+      # Private key is optional for read-only operations
+      # - key: PRIVATE_KEY
+      #   sync: false
