@@ -165,10 +165,25 @@ router.get('/records/:address', async (req, res) => {
         const { address } = req.params;
         if (!blockchainInitialized) return res.status(503).json({ error: 'Blockchain not connected' });
         const hashes = await blockchainService.getRecordsByOwner(address);
-        const records = await Promise.all(hashes.map(async (hash) => {
-            const details = await blockchainService.getIPDetails(hash);
-            return { hash: hash, ...details, registeredAt: new Date(details.timestamp * 1000).toISOString() };
-        }));
+
+        // Fetch details sequentially to avoid RPC rate limiting
+        const records = [];
+        for (const hash of hashes) {
+            try {
+                const details = await blockchainService.getIPDetails(hash);
+                records.push({
+                    hash: hash,
+                    ...details,
+                    registeredAt: new Date(details.timestamp * 1000).toISOString()
+                });
+                // Small delay to be nice to public RPC
+                await new Promise(resolve => setTimeout(resolve, 100));
+            } catch (err) {
+                console.error(`Failed to fetch details for hash ${hash}:`, err.message);
+                // Continue with other records even if one fails
+            }
+        }
+
         res.json({ owner: address, count: records.length, records: records });
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch records', message: error.message });
