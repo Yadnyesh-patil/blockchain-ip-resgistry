@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure your intellectual property with blockchain technology. Create tamper-proof ownership records in seconds.">
+    <title>IP Shield - Blockchain Intellectual Property Protection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Ethers.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.9.0/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
+        <div class="floating-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <span>IP Shield</span>
+            </a>
+            <div class="nav-links">
+                <a href="#register" class="nav-link">Register</a>
+                <a href="#verify" class="nav-link">Verify</a>
+                <a href="#my-records" class="nav-link">My Records</a>
+            </div>
+            <button id="connectWallet" class="btn btn-primary btn-connect">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <rect x="2" y="6" width="20" height="12" rx="2"/>
+                    <path d="M16 12h.01"/>
+                </svg>
+                <span>Connect Wallet</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    Blockchain Secured
+                </div>
+                <h1 class="hero-title">
+                    Protect Your <span class="gradient-text">Intellectual Property</span>
+                    <br>With Blockchain
+                </h1>
+                <p class="hero-subtitle">
+                    Create immutable, timestamped proof of ownership for your ideas, 
+                    documents, and creative works. Secure, simple, and legally recognized.
+                </p>
+                <div class="hero-actions">
+                    <a href="#register" class="btn btn-primary btn-lg">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                        Register IP Now
+                    </a>
+                    <a href="#verify" class="btn btn-secondary btn-lg">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35"/>
+                        </svg>
+                        Verify Ownership
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="totalRegistrations">0</span>
+                        <span class="stat-label">IPs Protected</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-value">256-bit</span>
+                        <span class="stat-label">SHA Encryption</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-value">∞</span>
+                        <span class="stat-label">Permanent Record</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h3>Immutable Records</h3>
+                    <p>Once registered, your IP proof cannot be altered or deleted from the blockchain.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3>Timestamped Proof</h3>
+                    <p>Every registration includes a cryptographic timestamp proving when you created it.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <h3>Instant Verification</h3>
+                    <p>Anyone can verify ownership instantly by checking the file hash on the blockchain.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Register Section -->
+    <section id="register" class="section register-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Register Your IP</h2>
+                <p class="section-subtitle">Upload your file to generate a unique cryptographic fingerprint and record it on the blockchain.</p>
+            </div>
+            
+            <div class="register-container">
+                <div class="register-card">
+                    <!-- Step Indicator -->
+                    <div class="steps-indicator">
+                        <div class="step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <span>Upload File</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step" data-step="2">
+                            <div class="step-number">2</div>
+                            <span>Add Details</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step" data-step="3">
+                            <div class="step-number">3</div>
+                            <span>Register</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Upload -->
+                    <div class="step-content active" data-step="1">
+                        <div class="upload-zone" id="uploadZone">
+                            <div class="upload-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="17 8 12 3 7 8"/>
+                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                            </div>
+                            <h3>Drag & Drop your file here</h3>
+                            <p>or click to browse</p>
+                            <span class="upload-hint">Supports any file type up to 50MB</span>
+                            <input type="file" id="fileInput" hidden>
+                        </div>
+                        
+                        <div class="file-preview hidden" id="filePreview">
+                            <div class="file-info">
+                                <div class="file-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                        <polyline points="14 2 14 8 20 8"/>
+                                    </svg>
+                                </div>
+                                <div class="file-details">
+                                    <span class="file-name" id="fileName"></span>
+                                    <span class="file-size" id="fileSize"></span>
+                                </div>
+                                <button class="btn-icon" id="removeFile" title="Remove file">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="18" y1="6" x2="6" y2="18"/>
+                                        <line x1="6" y1="6" x2="18" y2="18"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="hash-display">
+                                <label>SHA-256 Hash (Fingerprint)</label>
+                                <div class="hash-value">
+                                    <code id="fileHash"></code>
+                                    <button class="btn-icon" id="copyHash" title="Copy hash">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="hash-status" id="hashStatus">
+                                <span class="status-checking hidden">
+                                    <span class="spinner"></span> Checking blockchain...
+                                </span>
+                                <span class="status-new hidden">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                        <polyline points="22 4 12 14.01 9 11.01"/>
+                                    </svg>
+                                    Not registered - Ready to protect!
+                                </span>
+                                <span class="status-exists hidden">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <line x1="12" y1="8" x2="12" y2="12"/>
+                                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                    </svg>
+                                    Already registered on blockchain
+                                </span>
+                            </div>
+                            <button class="btn btn-primary btn-lg btn-full" id="nextStep1">
+                                Continue to Details
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                    <line x1="5" y1="12" x2="19" y2="12"/>
+                                    <polyline points="12 5 19 12 12 19"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Details -->
+                    <div class="step-content" data-step="2">
+                        <form id="ipDetailsForm" class="ip-form">
+                            <div class="form-group">
+                                <label for="ipTitle">Title *</label>
+                                <input type="text" id="ipTitle" placeholder="e.g., My Innovation Design v1.0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ipDescription">Description</label>
+                                <textarea id="ipDescription" rows="4" placeholder="Describe your intellectual property..."></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="backStep2">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                        <line x1="19" y1="12" x2="5" y2="12"/>
+                                        <polyline points="12 19 5 12 12 5"/>
+                                    </svg>
+                                    Back
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    Continue to Register
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                        <line x1="5" y1="12" x2="19" y2="12"/>
+                                        <polyline points="12 5 19 12 12 19"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Step 3: Register -->
+                    <div class="step-content" data-step="3">
+                        <div class="register-summary">
+                            <h3>Registration Summary</h3>
+                            <div class="summary-grid">
+                                <div class="summary-item">
+                                    <label>File</label>
+                                    <span id="summaryFile"></span>
+                                </div>
+                                <div class="summary-item">
+                                    <label>Title</label>
+                                    <span id="summaryTitle"></span>
+                                </div>
+                                <div class="summary-item full-width">
+                                    <label>Hash</label>
+                                    <code id="summaryHash"></code>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="wallet-status" id="walletStatus">
+                            <div class="wallet-not-connected" id="walletNotConnected">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="6" width="20" height="12" rx="2"/>
+                                    <path d="M16 12h.01"/>
+                                </svg>
+                                <p>Connect your wallet to register on blockchain</p>
+                                <button class="btn btn-primary" id="connectWalletStep3">Connect MetaMask</button>
+                            </div>
+                            <div class="wallet-connected hidden" id="walletConnected">
+                                <div class="wallet-info">
+                                    <span class="wallet-dot"></span>
+                                    <span id="walletAddress"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="backStep3">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                    <line x1="19" y1="12" x2="5" y2="12"/>
+                                    <polyline points="12 19 5 12 12 5"/>
+                                </svg>
+                                Back
+                            </button>
+                            <button class="btn btn-primary btn-lg" id="registerBtn" disabled>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                                Register on Blockchain
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Transaction Status -->
+                    <div class="tx-status hidden" id="txStatus">
+                        <div class="tx-pending" id="txPending">
+                            <div class="tx-spinner"></div>
+                            <h3>Processing Transaction</h3>
+                            <p>Please confirm the transaction in MetaMask...</p>
+                        </div>
+                        <div class="tx-success hidden" id="txSuccess">
+                            <div class="tx-icon success">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                            </div>
+                            <h3>Registration Successful!</h3>
+                            <p>Your intellectual property has been recorded on the blockchain.</p>
+                            <div class="tx-details">
+                                <div class="tx-detail">
+                                    <label>Transaction Hash</label>
+                                    <a href="#" id="txHash" target="_blank"></a>
+                                </div>
+                                <div class="tx-detail">
+                                    <label>Block Number</label>
+                                    <span id="txBlock"></span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" id="viewCertificate">View Ownership Certificate</button>
+                            <button class="btn btn-secondary" id="registerAnother">Register Another</button>
+                        </div>
+                        <div class="tx-error hidden" id="txError">
+                            <div class="tx-icon error">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="15" y1="9" x2="9" y2="15"/>
+                                    <line x1="9" y1="9" x2="15" y2="15"/>
+                                </svg>
+                            </div>
+                            <h3>Transaction Failed</h3>
+                            <p id="txErrorMsg"></p>
+                            <button class="btn btn-primary" id="retryTx">Try Again</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verify Section -->
+    <section id="verify" class="section verify-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Verify Ownership</h2>
+                <p class="section-subtitle">Check if a file is registered and view its ownership details.</p>
+            </div>
+            
+            <div class="verify-container">
+                <div class="verify-card">
+                    <div class="verify-tabs">
+                        <button class="verify-tab active" data-tab="file">Verify by File</button>
+                        <button class="verify-tab" data-tab="hash">Verify by Hash</button>
+                    </div>
+                    
+                    <div class="verify-tab-content active" data-tab="file">
+                        <div class="upload-zone upload-zone-sm" id="verifyUploadZone">
+                            <div class="upload-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                </svg>
+                            </div>
+                            <h3>Drop file to verify</h3>
+                            <p>or click to browse</p>
+                            <input type="file" id="verifyFileInput" hidden>
+                        </div>
+                    </div>
+                    
+                    <div class="verify-tab-content" data-tab="hash">
+                        <div class="form-group">
+                            <label for="verifyHash">Enter SHA-256 Hash</label>
+                            <div class="hash-input-group">
+                                <input type="text" id="verifyHash" placeholder="e.g., a1b2c3d4e5f6...">
+                                <button class="btn btn-primary" id="verifyHashBtn">Verify</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="verify-result hidden" id="verifyResult">
+                        <div class="result-found hidden" id="resultFound">
+                            <div class="result-header">
+                                <div class="result-icon success">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                        <path d="M9 12l2 2 4-4"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3>Ownership Verified</h3>
+                                    <p>This file is registered on the blockchain</p>
+                                </div>
+                            </div>
+                            <div class="result-details">
+                                <div class="result-item">
+                                    <label>Owner</label>
+                                    <span id="resultOwner"></span>
+                                </div>
+                                <div class="result-item">
+                                    <label>Title</label>
+                                    <span id="resultTitle"></span>
+                                </div>
+                                <div class="result-item">
+                                    <label>Registered At</label>
+                                    <span id="resultDate"></span>
+                                </div>
+                                <div class="result-item full-width">
+                                    <label>Description</label>
+                                    <span id="resultDescription"></span>
+                                </div>
+                                <div class="result-item full-width">
+                                    <label>File Hash</label>
+                                    <code id="resultHash"></code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="result-not-found hidden" id="resultNotFound">
+                            <div class="result-header">
+                                <div class="result-icon warning">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <line x1="12" y1="8" x2="12" y2="12"/>
+                                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3>Not Registered</h3>
+                                    <p>This file has not been registered on the blockchain</p>
+                                </div>
+                            </div>
+                            <a href="#register" class="btn btn-primary">Register This File</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Records Section -->
+    <section id="my-records" class="section records-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">My IP Records</h2>
+                <p class="section-subtitle">View all your registered intellectual property.</p>
+            </div>
+            
+            <div class="records-container">
+                <div class="records-empty" id="recordsEmpty">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="6" width="20" height="12" rx="2"/>
+                        <path d="M16 12h.01"/>
+                    </svg>
+                    <h3>Connect Wallet to View</h3>
+                    <p>Connect your MetaMask wallet to see your registered IPs</p>
+                    <button class="btn btn-primary" id="connectWalletRecords">Connect Wallet</button>
+                </div>
+                <div class="records-grid hidden" id="recordsGrid">
+                    <!-- Records will be populated here -->
+                </div>
+                <div class="records-loading hidden" id="recordsLoading">
+                    <div class="spinner"></div>
+                    <p>Loading your records...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div class="modal hidden" id="certificateModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content certificate-modal">
+            <button class="modal-close" id="closeCertificate">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <div class="certificate" id="certificate">
+                <div class="certificate-header">
+                    <div class="certificate-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h2>Certificate of Ownership</h2>
+                    <p>Blockchain Verified Intellectual Property</p>
+                </div>
+                <div class="certificate-body">
+                    <div class="certificate-field">
+                        <label>Title</label>
+                        <span id="certTitle"></span>
+                    </div>
+                    <div class="certificate-field">
+                        <label>Owner Address</label>
+                        <code id="certOwner"></code>
+                    </div>
+                    <div class="certificate-field">
+                        <label>Registration Date</label>
+                        <span id="certDate"></span>
+                    </div>
+                    <div class="certificate-field">
+                        <label>File Hash (SHA-256)</label>
+                        <code id="certHash"></code>
+                    </div>
+                    <div class="certificate-field">
+                        <label>Transaction Hash</label>
+                        <code id="certTxHash"></code>
+                    </div>
+                </div>
+                <div class="certificate-footer">
+                    <p>This certificate verifies that the above-mentioned intellectual property was registered on the blockchain at the specified time. The SHA-256 hash serves as a unique digital fingerprint of the original file.</p>
+                    <div class="certificate-seal">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                        <span>Blockchain Verified</span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="downloadCertificate">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download Certificate
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <span>IP Shield</span>
+                </div>
+                <p>Secure your ideas with blockchain technology</p>
+                <div class="footer-links">
+                    <a href="#register">Register</a>
+                    <a href="#verify">Verify</a>
+                    <a href="#my-records">My Records</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 IP Shield. Built on Ethereum/Polygon.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js" type="module"></script>
+</body>
+</html>

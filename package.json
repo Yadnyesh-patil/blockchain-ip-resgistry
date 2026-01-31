@@ -1,0 +1,38 @@
+{
+  "name": "blockchain-ip-proof",
+  "version": "1.0.0",
+  "description": "Blockchain-Based Intellectual Property Proof System",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "deploy:local": "npx hardhat run scripts/deploy.js --network localhost",
+    "deploy:mumbai": "npx hardhat run scripts/deploy.js --network mumbai",
+    "deploy:sepolia": "npx hardhat run scripts/deploy.js --network sepolia",
+    "deploy:polygon": "npx hardhat run scripts/deploy.js --network polygon",
+    "deploy:mainnet": "npx hardhat run scripts/deploy.js --network mainnet",
+    "node": "npx hardhat node"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ethers": "^6.9.0",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.4"
+  },
+  "keywords": [
+    "blockchain",
+    "intellectual-property",
+    "ethereum",
+    "polygon",
+    "solidity"
+  ],
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: ip-shield
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: NETWORK
+        value: mumbai
+      # Add these after deploying contract to testnet:
+      # - key: CONTRACT_ADDRESS
+      #   value: YOUR_CONTRACT_ADDRESS
+      # - key: MUMBAI_RPC_URL
+      #   value: https://rpc-mumbai.maticvigil.com
