@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const ipRoutes = require('./routes/ipRoutes');
+const ipRoutes = require('./routes/ipRoutesSepolia');
 
 // Load environment variables
 require('dotenv').config({ path: path.join(__dirname, '..', '.env') });

@@ -52,8 +52,8 @@ async function loadContractConfig() {
 
     // Use hardcoded address as last resort (from deployment)
     if (!CONTRACT_ADDRESS) {
-        CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-        console.log('Using default contract address:', CONTRACT_ADDRESS);
+        CONTRACT_ADDRESS = "0x93Eb2f88940778ae9B211065a03C488cB01BC761"; // Sepolia Address
+        console.log('Using fallback contract address:', CONTRACT_ADDRESS);
         await loadContractABI();
         return true;
     }
@@ -93,13 +93,12 @@ export async function connectWallet() {
     }
 
     try {
-        // Check network first (before requesting accounts)
-        // Get chainId multiple times to ensure we have the latest value
+        // Check network first
         let chainId = await requestWithRetry({ method: 'eth_chainId' });
         let chainIdNum = parseInt(chainId, 16);
-        const expectedChainId = 31337; // Hardhat Local
+        const expectedChainId = 11155111; // Sepolia Testnet
 
-        // Wait a bit and check again (sometimes MetaMask needs a moment)
+        // Wait a bit and check again
         await new Promise(resolve => setTimeout(resolve, 200));
         chainId = await window.ethereum.request({ method: 'eth_chainId' });
         chainIdNum = parseInt(chainId, 16);
@@ -109,10 +108,10 @@ export async function connectWallet() {
             console.log(`Current chain ID: ${chainIdNum}, expected: ${expectedChainId}`);
 
             try {
-                // Try to switch to Hardhat Local network
+                // Try to switch to Sepolia
                 await requestWithRetry({
                     method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: '0x7a69' }], // 31337 in hex
+                    params: [{ chainId: '0xaa36a7' }], // 11155111 in hex
                 });
 
                 // Wait for network to switch
@@ -129,15 +128,15 @@ export async function connectWallet() {
                         await requestWithRetry({
                             method: 'wallet_addEthereumChain',
                             params: [{
-                                chainId: '0x7a69',
-                                chainName: 'Hardhat Local',
+                                chainId: '0xaa36a7',
+                                chainName: 'Sepolia Testnet',
                                 nativeCurrency: {
-                                    name: 'Ethereum',
-                                    symbol: 'ETH',
+                                    name: 'Sepolia ETH',
+                                    symbol: 'SEP',
                                     decimals: 18
                                 },
-                                rpcUrls: ['http://127.0.0.1:8545'],
-                                blockExplorerUrls: []
+                                rpcUrls: ['https://rpc.sepolia.org'],
+                                blockExplorerUrls: ['https://sepolia.etherscan.io']
                             }],
                         });
                         // Wait for network to be added and switched
@@ -152,7 +151,7 @@ export async function connectWallet() {
                         }
                     } catch (addError) {
                         console.error('Add network error:', addError);
-                        throw new Error(`Please add Hardhat Local network manually:\nRPC URL: http://127.0.0.1:8545\nChain ID: 31337\n\nError: ${addError.message}`);
+                        throw new Error(`Please add Sepolia network manually:\nRPC URL: https://rpc.sepolia.org\nChain ID: 11155111\n\nError: ${addError.message}`);
                     }
                 }
             } catch (switchError) {
@@ -160,11 +159,11 @@ export async function connectWallet() {
                 // If switch fails, show helpful error
                 if (switchError.code === 4902) {
                     // Network not added
-                    throw new Error(`Hardhat Local network not found. Please add it manually in MetaMask:\nRPC URL: http://127.0.0.1:8545\nChain ID: 31337`);
+                    throw new Error(`Sepolia network not found. Please add it manually in MetaMask.`);
                 } else if (switchError.code === 4001) {
-                    throw new Error('Network switch was rejected. Please switch to Hardhat Local manually in MetaMask.');
+                    throw new Error('Network switch was rejected. Please switch to Sepolia manually in MetaMask.');
                 } else {
-                    throw new Error(`Please switch to Hardhat Local network in MetaMask (Chain ID: 31337). Current: ${chainIdNum}\n\nIf Hardhat Local is already selected, try refreshing the page.`);
+                    throw new Error(`Please switch to Sepolia network in MetaMask (Chain ID: 11155111). Current: ${chainIdNum}\n\nIf Sepolia is already selected, try refreshing the page.`);
                 }
             }
         }

@@ -1,8 +1,8 @@
 // Auto-generated deployment configuration
 const CONTRACT_CONFIG = {
-  address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-  network: "localhost",
-  deployedAt: "2026-01-31T10:57:23.281Z"
+  address: "0x93Eb2f88940778ae9B211065a03C488cB01BC761",
+  network: "sepolia",
+  deployedAt: "2026-01-31T14:59:19.971Z"
 };
 
 export default CONTRACT_CONFIG;

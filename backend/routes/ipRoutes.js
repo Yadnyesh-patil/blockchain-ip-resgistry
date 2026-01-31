@@ -19,7 +19,9 @@ let blockchainInitialized = false;
 
 const initBlockchain = async () => {
     try {
-        const network = process.env.NETWORK || 'localhost';
+        const network = 'sepolia'; // Force Sepolia for debugging
+        console.log("DEBUG: Forcing Network to:", network);
+        // const network = process.env.NETWORK || 'localhost';
         let deploymentPath;
         let rpcUrl;
 

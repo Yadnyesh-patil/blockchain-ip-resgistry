@@ -6,6 +6,15 @@ async function main() {
     console.log("Deploying IPRegistry contract...");
 
     // Get the contract factory
+    const [deployer] = await hre.ethers.getSigners();
+    if (!deployer) {
+        throw new Error("No signer available! Check hardhat.config.js and .env");
+    }
+    console.log("Deploying contracts with the account:", deployer.address);
+    // details
+    const balance = await hre.ethers.provider.getBalance(deployer.address);
+    console.log("Account balance:", balance.toString());
+
     const IPRegistry = await hre.ethers.getContractFactory("IPRegistry");
 
     // Deploy the contract
