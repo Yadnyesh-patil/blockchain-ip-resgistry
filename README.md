@@ -40,7 +40,7 @@ A decentralized application for creating tamper-proof ownership records of intel
 
 ```bash
 # Navigate to project directory
-cd c:\Users\Krishnab\Desktop\bc
+cd  C:\Users\Lenovo\OneDrive\Desktop\GDGC project\blockchain\bc>
 
 # Install dependencies
 npm install
